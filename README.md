@@ -1,40 +1,64 @@
+[![Build Status](https://chefcorp-partnerengineering.visualstudio.com/Chef%20Base%20Plans/_apis/build/status/chef-base-plans.alsa-lib?branchName=master)](https://chefcorp-partnerengineering.visualstudio.com/Chef%20Base%20Plans/_build/latest?definitionId=196&branchName=master)
 # alsa-lib
 
-This package provides the ALSA library.
+The Advanced Linux Sound Architecture (ALSA) provides audio and MIDI functionality to the Linux operating system.  See [documentation](https://alsa-project.org/wiki/Main_Page)
 
 ## Maintainers
 
-* The Habitat Maintainers: <humans@habitat.sh>
+* The Core Planners: <chef-core-planners@chef.io>
 
 ## Type of Package
 
 Binary package
 
-## Usage
+### Use as Dependency
 
-Typically this is a runtime dependency that can be added to your
-plan.sh:
+Binary packages can be set as runtime or build time dependencies. See [Defining your dependencies](https://www.habitat.sh/docs/developing-packages/developing-packages/#sts=Define%20Your%20Dependencies) for more information.
 
-    pkg_deps=(core/alsa-lib)
+To add core/alsa-lib as a dependency, you can add one of the following to your plan file.
 
-## Testing
+##### Buildtime Dependency
 
-Run the tests after building the package like so:
+> pkg_build_deps=(core/alsa-lib)
+
+##### Runtime dependency
+
+> pkg_deps=(core/alsa-lib)
+
+### Use as Tool
+
+#### Installation
+
+To install this plan, you should run the following commands to first install, and then link the binaries this plan creates.
+
+``hab pkg install core/alsa-lib --binlink``
+
+will add the following binary to the PATH:
+
+* /bin/aserver
+
+For example:
 
 ```bash
-hab studio build alsa-lib
-source results/last_build.env
-hab studio run "./alsa-lib/tests/test.sh $pkg_ident"
+[7][default:/src/alsa-lib:100]# hab pkg install core/alsa-lib --binlink
+» Installing core/alsa-lib
+☁ Determining latest version of core/alsa-lib in the 'stable' channel
+→ Found newer installed version (core/alsa-lib/1.1.9/20200811102940) than remote version (core/alsa-lib/1.1.9/20200404040530)
+→ Using core/alsa-lib/1.1.9/20200811102940
+★ Install of core/alsa-lib/1.1.9/20200811102940 complete with 0 new packages installed.
+» Binlinking aserver from core/alsa-lib/1.1.9/20200811102940 into /bin
+★ Binlinked aserver from core/alsa-lib/1.1.9/20200811102940 to /bin/aserver
+[8][default:/src/alsa-lib:0]#
 ```
 
-Sample output:
+#### Using an example binary
+
+You can now use the binary as normal.  For example:
+
+``/bin/aserver --help`` or ``aserver --help``
 
 ```bash
-✓ Installed core/alsa-lib/1.1.8/20190530132818
-★ Install of core/alsa-lib/1.1.8/20190530132818 complete with 1 new packages installed.
-1..4
-ok 1 package directory for package ident core/alsa-lib/1.1.8/20190530132818 exists
-ok 2 libraries are dynamically linked
-ok 3 aserver is dynamically linked
-ok 4 aserver help command works
+[10][default:/src/alsa-lib:0]# aserver --help
+Usage: aserver [OPTIONS] server
+--help                  help
 ```
