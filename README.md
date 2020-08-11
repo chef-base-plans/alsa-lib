@@ -9,11 +9,11 @@ The Advanced Linux Sound Architecture (ALSA) provides audio and MIDI functionali
 
 ## Type of Package
 
-Binary package
+Library package
 
 ### Use as Dependency
 
-Binary packages can be set as runtime or build time dependencies. See [Defining your dependencies](https://www.habitat.sh/docs/developing-packages/developing-packages/#sts=Define%20Your%20Dependencies) for more information.
+Library packages can be set as runtime or build time dependencies, however they are typically used as buildtime dependencies. See [Defining your dependencies](https://www.habitat.sh/docs/developing-packages/developing-packages/#sts=Define%20Your%20Dependencies) for more information.
 
 To add core/alsa-lib as a dependency, you can add one of the following to your plan file.
 
@@ -25,7 +25,7 @@ To add core/alsa-lib as a dependency, you can add one of the following to your p
 
 > pkg_deps=(core/alsa-lib)
 
-### Use as Tool
+### Use as a Library
 
 #### Installation
 
@@ -50,6 +50,33 @@ For example:
 ★ Binlinked aserver from core/alsa-lib/1.1.9/20200811102940 to /bin/aserver
 [8][default:/src/alsa-lib:0]#
 ```
+
+#### Viewing library files
+
+To view the library files first get the habitat installation directory
+
+```bash
+hab pkg path core/alsa-lib
+/hab/pkgs/core/alsa-lib/1.1.9/20200811102940
+```
+
+Then list the libraries, for example:
+
+```bash
+ls -1 $(hab pkg path core/alsa-lib)
+...
+...
+bin
+include
+lib
+share
+```
+
+### Use as Tool
+
+#### Installation
+
+Same as above.
 
 #### Using an example binary
 

@@ -18,11 +18,9 @@ control 'core-plans-alsa-lib-exists' do
     its('stderr') { should be_empty }
   end
 
-  ["aserver"].each do |binary_name|
-      command_full_path = File.join(plan_installation_directory.stdout.strip, "bin", binary_name)
-      describe file(command_full_path) do
-        it { should exist }
-        it { should be_executable }
-      end
+  command_full_path = File.join(plan_installation_directory.stdout.strip, "bin", "aserver")
+  describe file(command_full_path) do
+    it { should exist }
+    it { should be_executable }
   end
 end
