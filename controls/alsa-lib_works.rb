@@ -16,15 +16,12 @@ control 'core-plans-alsa-lib-works' do
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
-    its('stderr') { should be_empty }
   end
   
   plan_pkg_version = plan_installation_directory.stdout.split("/")[5]
   command_full_path = File.join(plan_installation_directory.stdout.strip, "bin", "aserver")
-  describe command("#{command_full_path} --help") do
+  describe command("#{command_full_path} --help 2>&1") do
     its('exit_status') { should eq 0 }
-    its('stderr') { should_not be_empty }
-    its('stderr') { should match /Usage:\s+[^\s]*\s+\[OPTIONS\]\s+server/ }
-    its('stdout') { should be_empty }
+    its('stdout') { should match /Usage:\s+[^\s]*\s+\[OPTIONS\]\s+server/ }
   end
 end
