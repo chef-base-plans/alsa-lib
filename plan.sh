@@ -1,12 +1,12 @@
 pkg_name=alsa-lib
 pkg_origin=core
-pkg_version=1.1.9
+pkg_version=1.2.4
 pkg_description="The Advanced Linux Sound Architecture (ALSA) provides audio and MIDI functionality to the Linux operating system."
 pkg_upstream_url=https://alsa-project.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("LGPL-2.1-or-later")
 pkg_source="ftp://ftp.alsa-project.org/pub/lib/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum=488373aef5396682f3a411a6d064ae0ad196b9c96269d0bb912fbdeec94b994b
+pkg_shasum=f7554be1a56cdff468b58fc1c29b95b64864c590038dd309c7a978c7116908f7
 pkg_deps=(
   core/glibc
 )
